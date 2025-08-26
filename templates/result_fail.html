@@ -1,0 +1,47 @@
+<!-- page 7 -->
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="emo_post";
+    }
+</script>
+{% endblock %}
+
+{% block main_text %}
+
+<!-- {% if error %}
+<div style="color: red; margin-bottom: 20px;">{{ error }}</div>
+
+{% endif %} -->
+
+<div class="grid-content">
+    <div class="left-part">
+        <br>
+<div class="container" style="width:90%; margin:0 auto; overflow:hidden;">
+  <img src="{{ url_for('static', filename='img/fix_result.jpg') }}" 
+       alt="Example Image"
+       style="width:100%; height:auto; object-fit:cover; clip-path:inset(0 0 0 10%);">
+</div>
+    </div>
+    <div class="right-part">
+        <p class="t_title">
+
+            The spaceship is in big trouble because of the wrong actions. The crew members life is at danger. 
+        <br>
+        </p>
+        <br>
+        <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+    </div>
+</div>
+
+
+
+
+<br>
+
+{% endblock %}
+{% block continue %}
+
+{% endblock %}

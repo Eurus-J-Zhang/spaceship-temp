@@ -1,0 +1,38 @@
+<!-- page 3 -->
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="day_choice";
+    }
+</script>
+{% endblock %}
+
+{% block main_text %}
+
+<div class="grid-content">
+    <div class="left-part">
+        <br>
+        <div class="container">
+            <img src="{{ url_for('static', filename='img/breakfast_.jpg') }}" 
+            alt="Example Image" style="width: 80%; height: auto;">
+        </div>
+    </div>
+    <div class="right-part">
+        <p class="t_title">
+            With all the knowledge in mind, now you are on the spaceship. One day as usual, you are having dinner talking about a 
+            normal ship life with your colleagues. 
+            
+            <br><br>
+            <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+        </p>
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block continue %}
+
+{% endblock %}

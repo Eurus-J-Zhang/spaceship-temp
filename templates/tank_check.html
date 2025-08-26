@@ -1,0 +1,66 @@
+<!-- page 2 -->
+{% extends 'base.html' %}
+
+{% block main_text %}
+
+{% if session.get('is_correct') is not none %}
+    <script>
+        window.onload = function() {
+            let message = "{% if session.get('is_correct') %}Yes, you are correct!{% else %}No, you are wrong. You should choose B. Decrease oxygen by 1% {% endif %}";
+            alert(message); // Show the message in an alert
+
+            setTimeout(() => {
+                window.location.href = "{{ url_for('ship_situation') }}"; // Redirect after showing the alert
+            }, 0); // Short delay to allow the alert to show before redirect
+        };
+    </script>
+    {% set _ = session.pop('is_correct') %}  {# Remove feedback after displaying #}
+{% endif %}
+
+<div class="grid-content">
+    <div class="left-part">
+        <br>
+    <div class="container">
+        
+        <img src="{{ url_for('static', filename='img/desk.jpg') }}" 
+        alt="Example Image" 
+        style="width: 80%; height: auto; ">
+    </div>
+        <br><br>
+    </div>
+    <div class="right-part">
+        <p class="t_title">
+            The situation in the spaceship will be similar but more complicated. This is a simple example exercise to get you ready. Let's try it out! 
+             <p>The <strong>standard ranges</strong> aboard the spaceship are:</p>
+  <ul>
+    <li><strong>Oxygen:</strong> <mark>20–22%</mark></li>
+    <li><strong>Carbon dioxide (CO<sub>2</sub>):</strong> <mark>0.4–0.8%</mark></li>
+  </ul>
+
+  <p><strong>Current levels:</strong> Oxygen <mark>23%</mark>, Carbon dioxide (CO<sub>2</sub>) 
+    <mark>0.6%</mark>.</p>
+
+  <p>Your task: <strong>calculate the needed adjustment</strong> and select the button that 
+    best returns the gases to the standard ranges. Choose an action to continue.</p>
+
+
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+        
+                {% for subfield in form.tank_practice %}
+                    <label>
+                        {{ subfield }}{{ subfield.label.text }}
+                    </label><br>
+                {% endfor %}
+                <br>
+
+                <input type="submit" value="Continue" class = "continue-btn"> <!-- Submit Button -->
+            </form>
+        </p>
+    </div>
+</div>
+<br>
+
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+<!-- page 0 -->
+
+{% extends 'base.html' %}
+
+{% block main_text %}
+<br>
+<p class="t_title">
+  <strong> Hello and welcome to an adventure! </strong>
+  <br><br>
+  You are about to embark on an exciting journey aboard a spaceship. It is a deep-space exploration, 
+  venturing further than anyone has ever gone before.
+  
+  What challenges might arise on this spaceship? Will you navigate them successfully? The choices you 
+  make will shape your journey and determine whether your mission succeeds or fails.
+ <br><br>
+ This adventure will take approximately 10 minutes. At the journey's end, you will be invited to reflect 
+ on your experience and share your insights through a brief questionaire. Once you submit it, you can go back to your Prolific page to claim your compensation.
+ If you are ready to begin, 
+ please enter your Prolific ID and demographic information to get started. 
+ 
+  <br>
+</p>
+<div class="grid-content">
+
+  <div class="left-part">
+    <img src="{{ url_for('static', filename='img/spaceship.jpg') }}" alt="Example Image" style="width: 100%;">
+    
+  </div>
+  <div class="right-part">
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <table class="my-table">
+          <tr>
+              <td><label for="id">Prolific ID:</label></td>
+              <td>{{ form.id(id='id', class = 'text-input', style='font-size: 16px;') }}</td>
+          </tr>
+          <tr>
+              <td><label>Gender:</label></td>
+              <td>        {% for subfield in form.gender %}
+                <label>{{ subfield }} {{ subfield.label }}</label>
+                {% endfor %}</td>
+          </tr>
+          <tr>
+            <td><label for="age">Age:</label></td>
+            <td>{{ form.age(id='age', class = 'text-input',style='font-size: 16px;') }}</td>
+        </tr>
+      </table>
+      <br>
+      <input type="submit" value="Start" class="continue-btn">
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

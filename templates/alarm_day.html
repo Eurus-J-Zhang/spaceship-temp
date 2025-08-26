@@ -1,0 +1,66 @@
+<!-- page 5 -->
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="tank_reason";
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the query parameter "choice"
+        const urlParams = new URLSearchParams(window.location.search);
+        const choice = urlParams.get('choice');
+
+        // Define different messages for each choice
+        const messages = {
+            'a': `You decide to watch a movie. Relax and enjoy your day off! 
+                    Just as you're engrossed in the film, the alarm rings.`,
+            'b': `You decide to work out. Time to break a sweat!
+                    In the middle of your workout, the alarm rings.`,
+            'c': `You opt to learn something new. Expand your knowledge!
+                    While you are learning, the alarm rings`,
+            'd': `You decide to write a diary. Reflect on your journey!
+                    While you're lost in your thoughts, the alarm rings.`
+        };
+
+        // Update the content based on the choice
+        const message = messages[choice].split('\n');
+const container = document.getElementById('messageContainer');
+message.forEach(line => {
+    const p = document.createElement('p'); // Create a new paragraph
+    p.textContent = line.trim();           // Add the text
+    container.appendChild(p);              // Append to the container
+})
+    });
+</script>
+{% endblock %}
+
+
+{% block main_text %}
+<div class="grid-content">
+    <div class="left-part">
+        <br>
+        <div class="container" style="width:100%; margin:0 auto; overflow:hidden;">
+        <img src="{{ url_for('static', filename='img/alarm.jpg') }}" alt="Example Image" 
+        style="width:100%; height:auto; object-fit:cover; clip-path:inset(0  15% 0 0);">
+        </div>
+    </div>
+    <div class="right-part">
+        <div id="messageContainer"></div>
+<p class="t_title">
+    <br>
+    <span id="dynamicContent"></span> <!-- Add this placeholder -->
+</p>
+<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+

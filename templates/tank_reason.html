@@ -1,0 +1,127 @@
+<!-- page 6 -->
+{% extends 'base.html' %}
+
+
+{% block main_text %}
+
+
+
+<div class="grid-content">
+    <div class="left-part">
+
+        <p>
+    You rush to check the spaceship’s gas system, displayed on the panel on the right. The
+    <strong>current gas levels</strong> and the <strong>standard ranges</strong>
+    are shown.
+  
+    Your goal is to adjust the levels so that <strong>both gases</strong> fall
+    within their standard ranges, using the <mark>fewest actions possible</mark>.
+  </p>
+
+  <p>
+    After selecting an action, click 'Continue' to apply it—
+    the current levels will update accordingly.
+
+You will only succeed when both gas levels fall within the standard ranges, achieved in the fewest steps possible.</p>
+ <p>
+Any action that would drop a gas level below 0 is <strong>invalid</strong> and cannot be performed.
+If you take more than <mark>5</mark> actions without reaching the goal, the task ends automatically in <strong>failure</strong>.
+</p>
+
+  <p>Please calculate first, then begin taking actions.</p>
+        <br>
+
+
+
+<div class="container" style="width:90%; margin:0 auto;height:400px; overflow:hidden;">
+  <img src="{{ url_for('static', filename='img/desk.jpg') }}" 
+       alt="Example Image"
+       style="width:100%; height:auto; object-fit:cover; clip-path:inset(10% 0 10% 0);">
+</div>
+
+    </div>
+
+    <div class="right-part">
+  
+
+
+<div class="status-panel">
+    {% if success %}
+  <div class="banner banner-success" role="status">
+    ✅ The target is reached! Both oxygen and CO₂ are within the safe range. Please continue.
+  </div>
+{% elif failed %}
+  <div class="banner banner-fail" role="alert">
+    ⚠️ You have taken more than 5 steps without reaching the goal. Please continue.
+  </div>
+{% endif %}
+  <table class="gas-table">
+    <thead>
+      <tr>
+        <th>Gas</th>
+        <th>Standard Range</th>
+        <th>Current Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Oxygen (O<sub>2</sub>)</td>
+        <td>20–22%</td>
+        <td><mark>{{ "%.1f"|format(oxygen) }}%</mark></td>
+      </tr>
+      <tr>
+        <td>Carbon Dioxide (CO<sub>2</sub>)</td>
+        <td>0.4–0.8%</td>
+        <td><mark>{{ "%.1f"|format(co2) }}%</mark></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="status-box">
+    <p>
+      <strong>Action step:</strong> {{ step_number }}
+      &nbsp;&nbsp;
+      <strong>Actions chosen:</strong> {{ actions_str }}
+    </p>
+  </div>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    {% if form.tank_reason.errors %}
+      <div class="form-error" role="alert">
+        {% for e in form.tank_reason.errors %}
+          <p>{{ e }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if not success and not failed %}
+      <fieldset class="choices">
+        <legend>Choose an action:</legend>
+        {% for subfield in form.tank_reason %}
+          <label class="choice">
+            {{ subfield }} {{ subfield.label.text }}
+          </label>
+        {% endfor %}
+      </fieldset>
+    {% endif %}
+
+    <div class="actions">
+      <input type="submit" value="Continue" class="continue-btn">
+    </div>
+  </form>
+</div>
+        
+
+
+    </div>
+</div>
+
+<br>
+
+
+
+
+
+{% endblock %}

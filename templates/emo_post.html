@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block main_text %}
+
+<p class="t_title">
+
+  <!-- <br>Please take a moment to reflect on your emotional experience, and rate them accordingly: -->
+  <br>
+  Given your performance in the task, how do you rate that your emotions <b>have changed</b> from the beginning of the task?
+  <br>(Every emotion here needs to be rated)
+  <br><br>
+
+<!-- </p>
+
+<p class = 't_note'> -->
+  -5 = a significant <b>decrease</b> in this emotion, 
+  0 = no change in this emotion, 
+  5 = a significant <b>increase</b> in this emotion
+</p>
+
+<div class="form-container">
+<form method="POST">
+  {{ form.hidden_tag() }}
+  
+  <table>
+    <tr>
+      <th></th>
+      <th>-5</th>
+      <th>-4</th>
+      <th>-3</th>
+      <th>-2</th>
+      <th>-1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+    <tr>
+      <td>{{ form.emo2_competence.label }}</td>
+      {% for subfield in form.emo2_competence %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td>{{ form.emo2_joy.label }}</td>
+      {% for subfield in form.emo2_joy %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td>{{ form.emo2_pride.label }}</td>
+      {% for subfield in form.emo2_pride %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td>{{ form.emo2_boredom.label }}</td>
+      {% for subfield in form.emo2_boredom %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+    </tr>
+    <tr>
+        <td>{{ form.emo2_irritation.label }}</td>
+        {% for subfield in form.emo2_irritation %}
+        <td><div class="radio-button">{{ subfield }}</div></td>
+        {% endfor %}
+    </tr>
+    <tr>
+      <td>{{ form.emo2_anxiety.label }}</td>
+      {% for subfield in form.emo2_anxiety %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td>{{ form.emo2_shame.label }}</td>
+      {% for subfield in form.emo2_shame %}
+      <td><div class="radio-button">{{ subfield }}</div></td>
+      {% endfor %}
+  </tr>
+  </table>
+<br>
+
+<p class="t_title">
+  Please elaborate on your responses. For example: 
+  <br>Why do you feel such emotions, which part of the task makes you feel that way? 
+  <br>And how do you feel that your emotions have changed during the task?
+    <br><br>
+</p>
+  
+  <div class="feedback-input">
+      {{ form.feedback2.label }}
+      {{ form.feedback2(class="feedback-input") }}
+  </div>
+<br>
+
+  <input type="submit" value="Submit" class = "continue-btn">
+</form>
+</div>
+
+<br><br><br>
+
+{% endblock %}
+

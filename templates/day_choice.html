@@ -1,0 +1,72 @@
+<!-- page 4-->
+{% extends 'base.html' %}
+{% block script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function fn1() {
+            // Get the selected choice
+            var choices = document.getElementsByName('itemChoice');
+            var selectedChoice = null;
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    selectedChoice = choices[i].value;
+                    break;
+                }
+            }
+
+            // If no choice is selected, exit the function
+            if (selectedChoice === null) {
+                alert('Please select an option.'); // Replace modal with a simple alert (optional)
+                return;
+            }
+
+            // Redirect to the next page with the selected choice as a query parameter
+            window.location.href = 'alarm_day?choice=' + selectedChoice;
+        }
+
+        // Bind the fn1 function to the continue button click event
+        document.getElementById('btn1').addEventListener('click', fn1);
+    });
+</script>
+
+{% endblock %}
+
+{% block main_text %}
+
+<div class="grid-content">
+    <div class="left-part">
+        <br>
+        <img src="{{ url_for('static', filename='img/float.jpg') }}" 
+        alt="Example Image" style="width: 80%; height: auto; display: block; margin: auto;">
+    </div>
+    <div class="right-part">
+        <p class="t_title">
+            Your mind drifts to the ship's situation, but today is your day off. What would you like to do?    <br>
+            
+            <form id="itemSearchForm">
+                <input type="radio" id="tvStand" name="itemChoice" value="a">
+                <label for="tvStand">A. Watch a movie</label><br>
+                
+                <input type="radio" id="underSofa" name="itemChoice" value="b">
+                <label for="underSofa">B. Work out</label><br>
+                
+                <input type="radio" id="underCarpet" name="itemChoice" value="c">
+                <label for="underCarpet">C. Learn something new</label><br>
+                
+                <input type="radio" id="insidePlant" name="itemChoice" value="d">
+                <label for="insidePlant">D. Write a diary</label><br>
+            </form>
+        
+        </p>
+        <br>
+        <button onclick="fn1()" id="btn1" class="continue-btn">Continue</button>
+    </div>
+    
+</div>
+
+
+{% endblock %}
+
+{% block continue %}
+
+{% endblock %}

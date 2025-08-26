@@ -1,0 +1,56 @@
+<!-- page 1 -->
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="tank_check";
+    }
+</script>
+ {% endblock %}
+
+
+{% block main_text %}
+<div class="grid-content">
+
+    <div class="left-part">
+        <br>
+        <div class="container">
+            <img src="{{ url_for('static', filename='img/desk.jpg') }}" 
+            alt="Example Image" 
+            style="width: 80%; height: auto; ">
+        </div>
+    </div>
+
+    <div class="right-part">
+        <p class="t_title">
+    You are an engineer assigned to maintenance duties aboard the spaceship.
+    One of your critical responsibilities is to ensure the proper functioning of the oxygen and 
+    carbon dioxide regulation system. As part of your daily routine check, you must monitor the current gas levels and make 
+    adjustments so that both oxygen and carbon dioxide remain within the standard ranges.
+
+</br>
+</br>
+    For example, you will be shown the current oxygen and carbon dioxide levels, along with 
+    the available actions you can take. Your task is to choose the most appropriate action 
+    to stabilize the atmosphere inside the spaceship.
+
+        </br></br>
+    Please continue to see an example exercise.
+
+
+
+</p>
+<br>
+<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+    </div>
+
+</div>
+<br><br>
+
+
+{% endblock %}
+
+{% block continue %}
+
+{% endblock %}
