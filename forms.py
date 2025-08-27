@@ -11,8 +11,8 @@ class DemographicInfo(FlaskForm):
 
 # tank check
 class TankForm(FlaskForm):
-    tank_practice = RadioField('Practice', choices=[('A','A. Increase oxygen by 1%'),('B','B. Decrease oxygen by 1%'),
-                                                    ('C','C. Increase carbon dioxide by 0.2%'),('D','D. Decrease carbon dioxide by 0.2%')], validators=[DataRequired()])
+    tank_practice = RadioField('Practice', choices=[('A','A. Increase temperature by 1°C'),('B','B. Decrease temperature by 1°C'),
+                                                    ('C','C. Increase humidity by 5%'),('D','D. Decrease humidity by 5%')], validators=[DataRequired()])
 
 # tank reason
 class ReasonForm(FlaskForm):

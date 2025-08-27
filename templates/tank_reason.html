@@ -5,17 +5,13 @@
 {% block main_text %}
 
 
-
 <div class="grid-content">
     <div class="left-part">
-
         <p>
-    You rush to check the spaceship’s gas system, displayed on the panel on the right. The
-    <strong>current gas levels</strong> and the <strong>standard ranges</strong>
-    are shown.
-  
-    Your goal is to adjust the levels so that <strong>both gases</strong> fall
-    within their standard ranges, using the <mark>fewest actions possible</mark>.
+You rush to check the spaceship’s environment system, displayed on the panel on the right.
+The standard ranges and the current levels are shown. 
+Your goal is to adjust the levels so that all the parameters fall within their standard ranges, 
+using the fewest actions possible. 
   </p>
 
   <p>
@@ -58,7 +54,7 @@ If you take more than <mark>5</mark> actions without reaching the goal, the task
   <table class="gas-table">
     <thead>
       <tr>
-        <th>Gas</th>
+        <th> </th>
         <th>Standard Range</th>
         <th>Current Level</th>
       </tr>
@@ -66,13 +62,23 @@ If you take more than <mark>5</mark> actions without reaching the goal, the task
     <tbody>
       <tr>
         <td>Oxygen (O<sub>2</sub>)</td>
-        <td>20–22%</td>
+        <td style="color: red;">error</td>
         <td><mark>{{ "%.1f"|format(oxygen) }}%</mark></td>
       </tr>
       <tr>
         <td>Carbon Dioxide (CO<sub>2</sub>)</td>
-        <td>0.4–0.8%</td>
+        <td style="color: red;">error</td>
         <td><mark>{{ "%.1f"|format(co2) }}%</mark></td>
+      </tr>
+      <tr>
+        <td>Temperature</td>
+        <td>21–24°C</td>
+        <td>22°C</td>
+      </tr>
+      <tr>
+        <td>Humidity </td>
+        <td>40-60%</td>
+        <td>47%</td>
       </tr>
     </tbody>
   </table>
@@ -112,16 +118,8 @@ If you take more than <mark>5</mark> actions without reaching the goal, the task
     </div>
   </form>
 </div>
-        
-
-
     </div>
 </div>
-
-<br>
-
-
-
 
 
 {% endblock %}

@@ -58,7 +58,6 @@ def emo_pre():
     return render_template('emo_pre.html', form=form)
 
 
-
 # p9
 @app.route('/emo_post', methods=['GET', 'POST'])
 def emo_post():
@@ -85,31 +84,6 @@ def emo_post():
         return redirect(url_for("ending")) 
     return render_template('emo_post.html',form=form)
 
-# # p9
-# @app.route('/appraisal', methods=['GET', 'POST'])
-# def appraisal():
-#     form = AppraisalForm()
-
-#     if form.validate_on_submit():
-#         data = form.data
-#         data.pop('csrf_token', None)
-#         session['appraisal_data'] = data
-
-#         index_data = session.get('index_data')
-#         tank_practice_data = session.get('tank_practice_data')
-#         # tank_reason_data = session.get('tank_reason_data')
-#         step_data = session.get('')
-#         history_data = session.get('history_data')
-#         emo_data = session.get('emo_data')
-#         appraisal_data = session.get('appraisal_data')
-
-#         combined_data = {**index_data,**tank_practice_data, **history_data, 
-#                          **emo_data, **appraisal_data}
-#         data = Data(**combined_data)
-#         db.session.add(data)
-#         db.session.commit()
-#         return redirect(url_for("ending")) 
-#     return render_template('appraisal.html',form=form)
 
 # P1
 @app.route('/system_intro')
@@ -154,6 +128,8 @@ def tank_reason():
     session.setdefault("oxygen", 19.0)
     session.setdefault("co2", 0.6)
     session.setdefault("history_data", [])
+    session.setdefault("modal_shown", False)  # Has modal been shown?
+    session.setdefault("choice_stage", 0)     # 0 = normal, 1 = only A, 2 = only C
 
     form = ReasonForm()
 
@@ -169,6 +145,7 @@ def tank_reason():
             return redirect(url_for("result_success"))
         if failed:
             return redirect(url_for("result_fail"))
+
 
         # Otherwise, we expect a radio choice; validate and apply action
         if form.validate_on_submit():
@@ -210,10 +187,7 @@ def tank_reason():
         step_number=step_number,
         actions_str=actions_str,
     )
-    # response = handle_form_submission(form, 'tank_reason_data', 'result')
-    # if response:
-    #     return response
-    # return render_template('tank_reason.html',form = form)
+
 
 # P7
 @app.route('/result_success')
