@@ -21,6 +21,10 @@ class ReasonForm(FlaskForm):
                                                 ('C','C. Inject & Scrub (O₂+1, CO₂−1)'),
                                                 ('D','D. Recycle (O₂−1, CO₂+1)')], validators=[DataRequired()])
 
+class FollowForm(FlaskForm):
+    follow_colleague = RadioField('Action', choices=[('A','Watch the colleague fix the issue')],
+                        validators=[DataRequired()])
+
 # Here is the first emotion check
 eleven_point_scale = [(str(i), f'Opt{i}') for i in range(11)]
 eleven_point_scale_change = [(str(i), f'Opt{i}') for i in range(-5, 6)]

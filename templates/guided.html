@@ -3,46 +3,20 @@
 
 
 {% block main_text %}
-{% if show_modal %}
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <p>While you are wondering, a colleague who knows about it comes to help.</p>
-    <button onclick="goNext()">Close</button>
-  </div>
-</div>
 
-<script>
-function goNext() {
-  window.location.href = "{{ url_for('guided') }}";
-}
-</script>
-{% endif %}
 
 <div class="grid-content">
     <div class="left-part">
-        <p>
-You rush to check the spaceship’s environment system, displayed on the panel on the right.
-The standard ranges and the current levels are shown. 
-Your goal is to adjust the levels so that all the parameters fall within their standard ranges, 
-using the fewest actions possible. 
-  </p>
 
-  <p>
-    After selecting an action, click 'Continue' to apply it—
-    the current levels will update accordingly.
-
-You will only succeed when both gas levels fall within the standard ranges, achieved in the fewest steps possible.</p>
-
-
-  <p>Please calculate first, then begin taking actions.</p>
-       
-
-<p class="t_warning">
+      <p class="t_text">
     Note:<br>
     Due to ongoing construction at Bagton Mere, the station is not accessible and no metros will pass through it.  <br>
     Your task remains the same.
 </p>
- <br>
+        <br>
+
+
+
 <div class="container" style="width:90%; margin:0 auto;height:400px; overflow:hidden;">
   <img src="{{ url_for('static', filename='img/desk.jpg') }}" 
        alt="Example Image"
@@ -51,10 +25,20 @@ You will only succeed when both gas levels fall within the standard ranges, achi
 
     </div>
 
-<div class="right-part">
+    <div class="right-part">
   
-<div class="status-panel">
 
+
+<div class="status-panel">
+    {% if success %}
+  <div class="banner banner-success" role="status">
+    ✅ The target is reached! Both oxygen and CO₂ are within the safe range. Please continue.
+  </div>
+{% elif failed %}
+  <div class="banner banner-fail" role="alert">
+    ⚠️ You have taken more than 5 steps without reaching the goal. Please continue.
+  </div>
+{% endif %}
   <table class="gas-table">
     <thead>
       <tr>
@@ -67,12 +51,12 @@ You will only succeed when both gas levels fall within the standard ranges, achi
       <tr>
         <td>Oxygen (O<sub>2</sub>)</td>
         <td style="color: red;">error</td>
-        <td><mark>19.0 %</mark></td>
+        <td><mark>16.0 %</mark></td>
       </tr>
       <tr>
         <td>Carbon Dioxide (CO<sub>2</sub>)</td>
         <td style="color: red;">error</td>
-        <td><mark>0.6 %</mark></td>
+        <td><mark>0.6%</mark></td>
       </tr>
       <tr>
         <td>Temperature</td>
@@ -91,15 +75,11 @@ You will only succeed when both gas levels fall within the standard ranges, achi
 
   <form method="POST" action="">
     {{ form.hidden_tag() }}
+     <legend>Choose an action:</legend>
+  {% for subfield in form.follow_colleague %}
+                <label>{{ subfield }} {{ subfield.label }}</label>
+                {% endfor %}
 
-      <fieldset class="choices">
-        <legend>Choose an action:</legend>
-        {% for subfield in form.tank_reason %}
-          <label class="choice">
-            {{ subfield }} {{ subfield.label.text }}
-          </label>
-        {% endfor %}
-      </fieldset>
 
     <div class="actions">
       <input type="submit" value="Continue" class="continue-btn">
