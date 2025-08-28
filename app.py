@@ -9,8 +9,8 @@ pymysql.install_as_MySQLdb()
 
 def create_app():
     app = Flask(__name__)
-    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL')   
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL')   
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     app.config['SECRET_KEY'] = "iloveeurus"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -77,23 +77,25 @@ def emo_post():
 def system_intro():
     return render_template('system_intro.html')
 
-# P2
 @app.route('/tank_check', methods=['GET', 'POST'])
 def tank_check():
     form = TankForm()
     CORRECT_ANSWER = "B"
 
-    if request.method == "POST":
-        if form.validate_on_submit():
-            data = form.data
-            data.pop('csrf_token', None)
-            session['tank_practice_data'] = data
-            user_answer = request.form.get("tank_practice") 
-            # Instead of sending a message, just send a boolean flag
-            session['is_correct'] = (user_answer == CORRECT_ANSWER)
-            session.modified = True
-            return redirect(url_for("tank_check"))  # Reload the same page
-    return render_template('tank_check.html', form = form)
+    if request.method == "POST" and form.validate_on_submit():
+        data = form.data
+        data.pop('csrf_token', None)
+        session['tank_practice_data'] = data
+
+        user_answer = request.form.get("tank_practice")
+        # one flag that encodes both "show?" and "which content?"
+        session['is_correct'] = (user_answer == CORRECT_ANSWER)
+
+        return redirect(url_for("tank_check"))
+
+    # GET after redirect
+    is_correct = session.pop('is_correct', None)   # None | True | False
+    return render_template('tank_check.html', form=form, is_correct=is_correct)
 
 # P3
 @app.route('/ship_situation')

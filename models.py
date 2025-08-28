@@ -10,7 +10,6 @@ class Data(db.Model):
 
     tank_practice = db.Column(db.String(10))
     
-    history = db.Column(db.String(255), nullable=False)
 
     emo1_competence = db.Column(db.Integer)
     emo1_joy = db.Column(db.Integer)
@@ -31,7 +30,6 @@ class Data(db.Model):
     feedback1 = db.Column(db.Text)
     feedback2 = db.Column(db.Text)
 
-    result = db.Column(db.String(10))
 
 
 

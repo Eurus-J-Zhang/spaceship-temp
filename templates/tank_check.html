@@ -3,18 +3,25 @@
 
 {% block main_text %}
 
-{% if session.get('is_correct') is not none %}
-    <script>
-        window.onload = function() {
-            let message = "{% if session.get('is_correct') %}Yes, you are correct!{% else %}Wrong answer. The correct answer is B. Decrease temperature by 1°C {% endif %}";
-            alert(message); // Show the message in an alert
 
-            setTimeout(() => {
-                window.location.href = "{{ url_for('ship_situation') }}"; // Redirect after showing the alert
-            }, 0); // Short delay to allow the alert to show before redirect
-        };
-    </script>
-    {% set _ = session.pop('is_correct') %}  {# Remove feedback after displaying #}
+{% if is_correct is not none %}
+<div id="myModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    {% if is_correct %}
+      <p>✅ Yes, you are correct!</p>
+    {% else %}
+      <p>❌ Wrong answer. The correct answer is B. Decrease temperature by 1°C </p>
+    {% endif %}
+    <button onclick="goNext()">Close</button>
+  </div>
+</div>
+
+
+<script>
+function goNext() {
+  window.location.href = "{{ url_for('ship_situation') }}";
+}
+</script>
 {% endif %}
 
 <div class="grid-content">
